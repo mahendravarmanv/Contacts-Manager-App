@@ -8,9 +8,11 @@ import { CustomMaterialModule } from './custom-material.module';
 import { ClientModule } from './client/client.module';
 import { CompanyModule } from './company/company.module';
 import { SharedModule } from './shared/shared.module';
+import { NavigationComponent } from './navigation/navigation.component';
+import { AboutModule } from './about/about.module';
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,8 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     ClientModule,
     CompanyModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    AboutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
