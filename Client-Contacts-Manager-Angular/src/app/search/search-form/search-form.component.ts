@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search-form',
@@ -6,12 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-form.component.scss']
 })
 export class SearchFormComponent implements OnInit {
-  searchField: string="";
-  constructor() { }
+  searchForm: FormGroup;
+  searchField = new FormControl('');
 
-  ngOnInit(): void {
+  @Input()
+  title: string;
+
+  @Output()
+  searchEvent: EventEmitter<string> = new EventEmitter();
+
+  constructor(fb: FormBuilder) {
+    this.searchForm = fb.group({
+      searchBox: this.searchField
+    })
   }
-  onSubmit(){
-    console.log(this.searchField);
+
+  ngOnInit() {
+    this.searchField.valueChanges.subscribe(result => {
+      this.searchEvent.emit(result);
+    })
   }
 }
